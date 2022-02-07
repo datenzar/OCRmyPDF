@@ -1,0 +1,22 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: traefik
+
+services:
+  ocrmypdf:
+    build:  
+      context: ./
+      dockerfile: ./.docker/Dockerfile
+    command: webservice.py
+    entrypoint: python3
+    environment:
+      - TZ=${TZ}
+    expose:
+      - 5000
+    labels:
+      # configuration for traefik authentication (ocrmypdf / user@123!!)      
+      - traefik.http.middlewares.ocrmypdf-auth.basicauth.users=ocrmypdf:$$apr1$$db3qz8xw$$K4aaEye1oEeR3mwr2qkAP0
+      - traefik.http.routers.ocrmypdf.middlewares=ocrmypdf-auth

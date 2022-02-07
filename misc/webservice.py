@@ -87,7 +87,7 @@ def upload_file():
     <h1>Upload a PDF (debug UI)</h1>
     <form method=post enctype=multipart/form-data>
       <label for="args">Command line parameters</label>
-      <input type=textbox name=params>
+      <input type=textbox name=params value="-l deu+eng --force-ocr">
       <label for="file">File to upload</label>
       <input type=file name=file>
       <input type=submit value=Upload>
